@@ -10,7 +10,6 @@ export default class ReadMore extends React.Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    await nextFrameAsync();
 
     if (!this._isMounted) {
       return;
@@ -19,7 +18,6 @@ export default class ReadMore extends React.Component {
     // Get the height of the text with no restriction on number of lines
     const fullHeight = await measureHeightAsync(this._text);
     this.setState({ measured: true });
-    await nextFrameAsync();
 
     if (!this._isMounted) {
       return;
@@ -103,10 +101,6 @@ function measureHeightAsync(component) {
       resolve(h);
     });
   });
-}
-
-function nextFrameAsync() {
-  return new Promise(resolve => requestAnimationFrame(() => resolve()));
 }
 
 const styles = StyleSheet.create({
